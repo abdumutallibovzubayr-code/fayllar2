@@ -1,0 +1,21 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 240 52" width="100%" height="100%">
+  <!-- Uzum Logo Icon -->
+  <g transform="translate(6, 4)">
+    <!-- Rounded Grape Plaque / Badge -->
+    <rect x="0" y="0" width="44" height="44" rx="22" fill="#FFE600" />
+    <g transform="translate(22, 22) rotate(-12) translate(-22, -22)">
+      <rect x="6" y="6" width="32" height="32" rx="10" fill="#7000FF" />
+      <!-- Stylized 'u' and dot -->
+      <path d="M15 16 V23 C15 26.5 17.5 29 21 29 C24.5 29 27 26.5 27 23 V16" fill="none" stroke="#FFFFFF" stroke-width="3.5" stroke-linecap="round" stroke-linejoin="round" />
+      <circle cx="21" cy="11.5" r="2.2" fill="#FFFFFF" />
+    </g>
+  </g>
+
+  <!-- Wordmark "uzum market" -->
+  <text x="60" y="32" fill="#1F2026" font-family="'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif" font-weight="900" font-size="24" letter-spacing="-0.8">
+    uzum
+  </text>
+  <text x="122" y="32" fill="#7000FF" font-family="'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif" font-weight="800" font-size="24" letter-spacing="-0.5">
+    market
+  </text>
+</svg>

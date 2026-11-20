@@ -1,0 +1,91 @@
+/**
+ * UZUM MARKET CLONE - ANIMATIONS & TRANSITIONS
+ */
+
+@keyframes badgePop {
+  0% { transform: scale(0.6); opacity: 0.5; }
+  50% { transform: scale(1.35); }
+  100% { transform: scale(1); opacity: 1; }
+}
+
+.badge-pop {
+  animation: badgePop 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275) forwards;
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+@keyframes fadeOut {
+  from { opacity: 1; transform: translateY(0); }
+  to { opacity: 0; transform: translateY(12px); }
+}
+
+@keyframes modalZoomIn {
+  from { opacity: 0; transform: scale(0.94) translateY(12px); }
+  to { opacity: 1; transform: scale(1) translateY(0); }
+}
+
+@keyframes drawerSlideRight {
+  from { transform: translateX(100%); }
+  to { transform: translateX(0); }
+}
+
+@keyframes drawerSlideDown {
+  from { transform: translateY(-20px); opacity: 0; }
+  to { transform: translateY(0); opacity: 1; }
+}
+
+@keyframes heartBurst {
+  0% { transform: scale(1); }
+  35% { transform: scale(1.4); }
+  60% { transform: scale(0.9); }
+  100% { transform: scale(1); }
+}
+
+.uz-fav-btn.active .heart-icon {
+  animation: heartBurst 0.35s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+}
+
+@keyframes toastSlideUp {
+  from {
+    opacity: 0;
+    transform: translateY(24px) scale(0.95);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}
+
+.uz-toast {
+  animation: toastSlideUp 0.3s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
+
+.uz-toast.fade-out {
+  animation: fadeOut 0.25s forwards;
+}
+
+@keyframes pulseHighlight {
+  0% { background-color: rgba(112, 0, 255, 0.08); }
+  50% { background-color: rgba(112, 0, 255, 0.18); }
+  100% { background-color: transparent; }
+}
+
+.highlight-pulse {
+  animation: pulseHighlight 1.5s ease-out;
+}
+
+/* Skeleton Loading Shimmer */
+@keyframes shimmer {
+  0% { background-position: -200% 0; }
+  100% { background-position: 200% 0; }
+}
+
+.skeleton {
+  background: linear-gradient(90deg, #f0f2f5 25%, #e6e8ec 50%, #f0f2f5 75%);
+  background-size: 200% 100%;
+  animation: shimmer 1.5s infinite;
+  border-radius: 6px;
+}

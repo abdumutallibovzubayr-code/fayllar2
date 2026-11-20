@@ -1,0 +1,52 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 400" width="100%" height="100%">
+  <defs>
+    <linearGradient id="bgGrad3" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#0E1626" />
+      <stop offset="60%" stop-color="#1C2740" />
+      <stop offset="100%" stop-color="#3A1C66" />
+    </linearGradient>
+    <linearGradient id="neonCyan" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" stop-color="#00F5D4" />
+      <stop offset="100%" stop-color="#00BBF9" />
+    </linearGradient>
+  </defs>
+
+  <rect width="1200" height="400" rx="20" fill="url(#bgGrad3)" />
+
+  <g transform="translate(80, 50)">
+    <rect width="180" height="36" rx="18" fill="#00F5D4" />
+    <text x="90" y="23" fill="#0E1626" font-family="'Inter', sans-serif" font-weight="800" font-size="14" text-anchor="middle">
+      TOP TEXNIKA
+    </text>
+  </g>
+
+  <text x="80" y="140" fill="#FFFFFF" font-family="'Inter', sans-serif" font-weight="900" font-size="44" letter-spacing="-1">
+    Elektronika & Gadjetlar
+  </text>
+  <text x="80" y="195" fill="#00F5D4" font-family="'Inter', sans-serif" font-weight="800" font-size="34">
+    Rasmiy Kafolat bilan
+  </text>
+  <text x="80" y="245" fill="#C3C9D6" font-family="'Inter', sans-serif" font-weight="500" font-size="18">
+    Apple, Samsung, Xiaomi va boshqa yetakchi brendlar original narxlarda
+  </text>
+
+  <g transform="translate(80, 290)">
+    <rect width="210" height="52" rx="26" fill="url(#neonCyan)" />
+    <text x="105" y="32" fill="#0E1626" font-family="'Inter', sans-serif" font-weight="800" font-size="16" text-anchor="middle">
+      Tanlab ko'rish →
+    </text>
+  </g>
+
+  <!-- Laptop & Earphones Graphic -->
+  <g transform="translate(850, 190)">
+    <circle cx="0" cy="0" r="140" fill="#00F5D4" fill-opacity="0.08" />
+    <!-- Laptop -->
+    <rect x="-120" y="-70" width="220" height="135" rx="8" fill="#202A3C" stroke="#00F5D4" stroke-width="2" />
+    <rect x="-105" y="-55" width="190" height="105" rx="4" fill="#0E1626" />
+    <text x="-10" y="2" fill="#00F5D4" font-family="'Inter', sans-serif" font-weight="800" font-size="18" text-anchor="middle">TECH 2026</text>
+    <path d="M-150 65 L130 65 L110 77 L-130 77 Z" fill="#3D4B63" />
+    <!-- Wireless earbud -->
+    <ellipse cx="90" cy="-60" rx="22" ry="32" fill="#FFFFFF" />
+    <circle cx="90" cy="-60" r="14" fill="#7000FF" />
+  </g>
+</svg>

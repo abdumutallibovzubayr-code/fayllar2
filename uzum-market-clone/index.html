@@ -1,0 +1,678 @@
+<!DOCTYPE html>
+<html lang="uz">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0">
+  <title>Uzum Market — Internet-do'kon: keng tanlov, qulay narxlar va 1 kunda yetkazib berish</title>
+  <meta name="description" content="O'zbekistondagi eng mashhur marketpleys. Millionlab mahsulotlar, qulay narxlar, muddatli to'lov va ertagayoq bepul yetkazib berish.">
+  
+  <!-- Favicon -->
+  <link rel="icon" type="image/svg+xml" href="assets/icons/logo.svg">
+  
+  <!-- Google Fonts: Inter -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+
+  <!-- CSS Stylesheets -->
+  <link rel="stylesheet" href="css/style.css">
+  <link rel="stylesheet" href="css/animations.css">
+  <link rel="stylesheet" href="css/responsive.css">
+</head>
+<body>
+
+  <!-- ==========================================================================
+       TOP NOTIFICATION & LOCATION BAR
+       ========================================================================== -->
+  <div class="uz-top-bar">
+    <div class="uz-container uz-top-bar-inner">
+      <!-- Left: City Selector & Pickup Points -->
+      <div class="uz-top-left">
+        <div class="uz-city-picker" id="headerCityBtn" title="Shaharni tanlash">
+          <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"></path>
+            <circle cx="12" cy="10" r="3"></circle>
+          </svg>
+          <span>Shahar: <strong class="current-city-label">Toshkent</strong></span>
+          <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <polyline points="6 9 12 15 18 9"></polyline>
+          </svg>
+        </div>
+        <a href="javascript:void(0)" class="uz-pickup-link" onclick="uiManager.openCityModal()">Topshirish punktlari</a>
+      </div>
+
+      <!-- Center: 1-Day Free Delivery Highlight -->
+      <div class="uz-top-center">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
+          <rect x="1" y="3" width="15" height="13"></rect>
+          <polygon points="16 8 20 8 23 11 23 16 16 16 16 8"></polygon>
+          <circle cx="5.5" cy="18.5" r="2.5"></circle>
+          <circle cx="18.5" cy="18.5" r="2.5"></circle>
+        </svg>
+        <span>Buyurtmangizni 1 kunda bepul yetkazib beramiz!</span>
+      </div>
+
+      <!-- Right: FAQ, Orders & Language Selector -->
+      <div class="uz-top-right">
+        <a href="javascript:void(0)" class="uz-top-link" onclick="uiManager.showToast('Tez-tez beriladigan savollar', 'info')">Savol-javoblar</a>
+        <a href="javascript:void(0)" class="uz-top-link auth-open-trigger">Buyurtmalarim</a>
+        <div class="uz-lang-picker" onclick="uiManager.showToast('Til: O\'zbekcha tanlangan', 'info')">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <circle cx="12" cy="12" r="10"></circle>
+            <line x1="2" y1="12" x2="22" y2="12"></line>
+            <path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"></path>
+          </svg>
+          <span>O'zbekcha</span>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ==========================================================================
+       STICKY MAIN HEADER
+       ========================================================================== -->
+  <header class="uz-header" id="mainHeader">
+    <div class="uz-container">
+      <div class="uz-header-main">
+        <!-- Logo -->
+        <a href="index.html" class="uz-logo-wrap" title="Uzum Market">
+          <img src="assets/icons/logo.svg" alt="Uzum Market" class="uz-logo-img">
+        </a>
+
+        <!-- Katalog Mega Button -->
+        <button type="button" class="uz-catalog-btn" id="catalogMenuBtn">
+          <span class="uz-catalog-icon">
+            <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round">
+              <rect x="3" y="3" width="7" height="7" rx="1.5"></rect>
+              <rect x="14" y="3" width="7" height="7" rx="1.5"></rect>
+              <rect x="3" y="14" width="7" height="7" rx="1.5"></rect>
+              <rect x="14" y="14" width="7" height="7" rx="1.5"></rect>
+            </svg>
+          </span>
+          <span>Katalog</span>
+        </button>
+
+        <!-- Search Bar with Live Autocomplete -->
+        <div class="uz-search-box">
+          <form class="uz-search-form" id="searchForm">
+            <input 
+              type="text" 
+              class="uz-search-input" 
+              id="mainSearchInput" 
+              placeholder="Mahsulotlar va turkumlarni qidirish..." 
+              autocomplete="off" 
+              aria-label="Mahsulotlarni qidirish"
+            />
+            <button type="button" class="uz-search-clear-btn" id="searchClearBtn" title="Tozalash">✕</button>
+            <button type="submit" class="uz-search-submit-btn" aria-label="Qidirish">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
+                <circle cx="11" cy="11" r="8"></circle>
+                <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
+              </svg>
+            </button>
+          </form>
+
+          <!-- Autocomplete Suggestions Dropdown -->
+          <div class="uz-search-dropdown" id="searchSuggestionsDropdown"></div>
+        </div>
+
+        <!-- Header Actions: Kirish, Sevimlilar, Savat -->
+        <div class="uz-header-actions">
+          <!-- Profile / Kirish -->
+          <button type="button" class="uz-nav-btn auth-open-trigger" title="Kirish / Profil">
+            <span class="uz-nav-icon-wrap">
+              <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path>
+                <circle cx="12" cy="7" r="4"></circle>
+              </svg>
+            </span>
+            <span class="user-profile-name">Kirish</span>
+          </button>
+
+          <!-- Sevimlilar (Favorites) -->
+          <button type="button" class="uz-nav-btn fav-open-trigger" title="Saralangan mahsulotlar">
+            <span class="uz-nav-icon-wrap">
+              <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"></path>
+              </svg>
+              <span class="uz-nav-badge fav-badge">0</span>
+            </span>
+            <span>Saralangan</span>
+          </button>
+
+          <!-- Savat (Shopping Cart) -->
+          <button type="button" class="uz-nav-btn cart-open-trigger" title="Savatcha">
+            <span class="uz-nav-icon-wrap">
+              <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <path d="M6 2L3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4z"></path>
+                <line x1="3" y1="6" x2="21" y2="6"></line>
+                <path d="M16 10a4 4 0 0 1-8 0"></path>
+              </svg>
+              <span class="uz-nav-badge cart-badge">0</span>
+            </span>
+            <span>Savat</span>
+          </button>
+        </div>
+      </div>
+
+      <!-- Sub-header Category Links -->
+      <nav class="uz-subnav-bar">
+        <ul class="uz-subnav-list">
+          <li><a href="javascript:void(0)" class="subnav-item active" data-cat="all">Barchasi</a></li>
+          <li><a href="javascript:void(0)" class="subnav-item hot" data-cat="aksiya">🔥 Katta chegirmalar</a></li>
+          <li><a href="javascript:void(0)" class="subnav-item nasiya" data-cat="nasiya">⭐ Muddatli to'lov 0-0-12</a></li>
+          <li><a href="javascript:void(0)" class="subnav-item" data-cat="elektronika">Elektronika</a></li>
+          <li><a href="javascript:void(0)" class="subnav-item" data-cat="maishiy-texnika">Maishiy texnika</a></li>
+          <li><a href="javascript:void(0)" class="subnav-item" data-cat="kiyim">Kiyim</a></li>
+          <li><a href="javascript:void(0)" class="subnav-item" data-cat="poyabzal">Poyabzal</a></li>
+          <li><a href="javascript:void(0)" class="subnav-item" data-cat="gozallik">Goʻzallik va parvarish</a></li>
+          <li><a href="javascript:void(0)" class="subnav-item" data-cat="uy-rozgor">Uy-roʻzgʻor buyumlari</a></li>
+          <li><a href="javascript:void(0)" class="subnav-item" data-cat="sport">Sport va hordiq</a></li>
+          <li><a href="javascript:void(0)" class="subnav-item" data-cat="bolalar">Bolalar mahsulotlari</a></li>
+          <li><a href="javascript:void(0)" class="subnav-item" data-cat="oziq-ovqat">Oziq-ovqat</a></li>
+        </ul>
+      </nav>
+    </div>
+  </header>
+
+  <!-- ==========================================================================
+       MEGA CATALOG DRAWER (Two-column layout)
+       ========================================================================== -->
+  <div class="catalog-mega-drawer" id="catalogMegaDrawer">
+    <div class="catalog-backdrop" id="catalogBackdrop"></div>
+    <div class="catalog-panel">
+      <div class="catalog-panel-inner">
+        <!-- Left: Primary Categories List -->
+        <div class="catalog-sidebar" id="catalogCategoriesList"></div>
+        <!-- Right: Subcategories Grid & Featured Banner -->
+        <div class="catalog-subcontent" id="catalogSubcategoriesContent"></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ==========================================================================
+       SEARCH RESULTS VIEW (Dynamically shown on full search query)
+       ========================================================================== -->
+  <section class="uz-section" id="searchResultsSection" style="display: none;">
+    <div class="uz-container">
+      <div class="uz-section-header">
+        <div class="uz-section-title-wrap">
+          <h2 class="uz-section-title" id="searchQueryTitle">Qidiruv natijalari</h2>
+          <span class="uz-section-count" id="searchResultsCount">0 ta mahsulot</span>
+        </div>
+        <button type="button" class="subcat-all-btn" onclick="uiManager.clearSearchFilter()">
+          ← Bosh sahifaga qaytish
+        </button>
+      </div>
+      <div class="uz-product-grid" id="searchResultsGrid"></div>
+    </div>
+  </section>
+
+  <!-- ==========================================================================
+       HOMEPAGE MAIN WRAPPER
+       ========================================================================== -->
+  <main id="homePageSections">
+
+    <!-- B. HERO PROMOTIONAL BANNER CAROUSEL -->
+    <section class="hero-carousel-section">
+      <div class="uz-container">
+        <div class="hero-slider">
+          <!-- Slide 1: Bahorgi Chegirmalar -->
+          <div class="hero-slide active">
+            <img src="assets/banners/banner1.svg" alt="Bahorgi Chegirmalar" class="hero-slide-img">
+          </div>
+          <!-- Slide 2: Uzum Nasiya 0-0-12 -->
+          <div class="hero-slide">
+            <img src="assets/banners/banner2.svg" alt="Uzum Nasiya" class="hero-slide-img">
+          </div>
+          <!-- Slide 3: Elektronika & Gadjetlar -->
+          <div class="hero-slide">
+            <img src="assets/banners/banner3.svg" alt="Top Texnika" class="hero-slide-img">
+          </div>
+          <!-- Slide 4: Go'zallik & Parvarish -->
+          <div class="hero-slide">
+            <img src="assets/banners/banner4.svg" alt="Go'zallik va Parvarish" class="hero-slide-img">
+          </div>
+          <!-- Slide 5: Ertagayoq Bepul Yetkazish -->
+          <div class="hero-slide">
+            <img src="assets/banners/banner5.svg" alt="Tez va Bepul Yetkazib Berish" class="hero-slide-img">
+          </div>
+
+          <!-- Controls -->
+          <button type="button" class="hero-nav-btn hero-prev-btn" aria-label="Oldingi slayd">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="15 18 9 12 15 6"></polyline></svg>
+          </button>
+          <button type="button" class="hero-nav-btn hero-next-btn" aria-label="Keyingi slayd">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="9 18 15 12 9 6"></polyline></svg>
+          </button>
+
+          <!-- Indicators -->
+          <div class="hero-indicators"></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- C. QUICK CATEGORY CIRCLES -->
+    <section class="category-circles-section">
+      <div class="uz-container">
+        <div class="category-circles-grid">
+          <div class="category-circle-item" data-cat="katalog">
+            <div class="cat-circle-icon"><img src="assets/icons/cat-katalog.svg" alt="Katalog"></div>
+            <span class="cat-circle-name">Katalog</span>
+          </div>
+          <div class="category-circle-item" data-cat="aksiya">
+            <div class="cat-circle-icon"><img src="assets/icons/cat-aksiya.svg" alt="Katta savdo"></div>
+            <span class="cat-circle-name">Katta savdo</span>
+          </div>
+          <div class="category-circle-item" data-cat="nasiya">
+            <div class="cat-circle-icon"><img src="assets/icons/cat-nasiya.svg" alt="Muddatli to'lov"></div>
+            <span class="cat-circle-name">Nasiya 0-0-12</span>
+          </div>
+          <div class="category-circle-item" data-cat="elektronika">
+            <div class="cat-circle-icon"><img src="assets/icons/cat-elektronika.svg" alt="Elektronika"></div>
+            <span class="cat-circle-name">Elektronika</span>
+          </div>
+          <div class="category-circle-item" data-cat="maishiy-texnika">
+            <div class="cat-circle-icon"><img src="assets/icons/cat-maishiy.svg" alt="Maishiy texnika"></div>
+            <span class="cat-circle-name">Maishiy texnika</span>
+          </div>
+          <div class="category-circle-item" data-cat="kiyim">
+            <div class="cat-circle-icon"><img src="assets/icons/cat-kiyim.svg" alt="Kiyim"></div>
+            <span class="cat-circle-name">Kiyim</span>
+          </div>
+          <div class="category-circle-item" data-cat="poyabzal">
+            <div class="cat-circle-icon"><img src="assets/icons/cat-poyabzal.svg" alt="Poyabzal"></div>
+            <span class="cat-circle-name">Poyabzal</span>
+          </div>
+          <div class="category-circle-item" data-cat="gozallik">
+            <div class="cat-circle-icon"><img src="assets/icons/cat-gozallik.svg" alt="Go'zallik"></div>
+            <span class="cat-circle-name">Go'zallik</span>
+          </div>
+          <div class="category-circle-item" data-cat="uy-rozgor">
+            <div class="cat-circle-icon"><img src="assets/icons/cat-uy.svg" alt="Uy-ro'zg'or"></div>
+            <span class="cat-circle-name">Uy-ro'zg'or</span>
+          </div>
+          <div class="category-circle-item" data-cat="bolalar">
+            <div class="cat-circle-icon"><img src="assets/icons/cat-bolalar.svg" alt="Bolalar"></div>
+            <span class="cat-circle-name">Bolalar uchun</span>
+          </div>
+          <div class="category-circle-item" data-cat="sport">
+            <div class="cat-circle-icon"><img src="assets/icons/cat-sport.svg" alt="Sport"></div>
+            <span class="cat-circle-name">Sport</span>
+          </div>
+          <div class="category-circle-item" data-cat="oziq-ovqat">
+            <div class="cat-circle-icon"><img src="assets/icons/cat-oziq-ovqat.svg" alt="Oziq-ovqat"></div>
+            <span class="cat-circle-name">Oziq-ovqat</span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- D1. PRODUCT SECTION: Mashhur mahsulotlar (Popular) -->
+    <section class="uz-section">
+      <div class="uz-container">
+        <div class="uz-section-header">
+          <div class="uz-section-title-wrap">
+            <h2 class="uz-section-title">
+              Mashhur mahsulotlar
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="9 18 15 12 9 6"></polyline></svg>
+            </h2>
+          </div>
+        </div>
+        <div class="uz-product-grid" id="popularProductsGrid"></div>
+      </div>
+    </section>
+
+    <!-- D2. PRODUCT SECTION: Siz uchun tavsiyalar (For You) -->
+    <section class="uz-section" style="background-color: var(--uzum-bg-light); border-radius: 20px; padding: 28px 0;">
+      <div class="uz-container">
+        <div class="uz-section-header">
+          <div class="uz-section-title-wrap">
+            <h2 class="uz-section-title">
+              Siz uchun tavsiyalar
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="9 18 15 12 9 6"></polyline></svg>
+            </h2>
+          </div>
+        </div>
+        <div class="uz-product-grid" id="recommendedProductsGrid"></div>
+      </div>
+    </section>
+
+    <!-- D3. PRODUCT SECTION: Eng ko'p sotilganlar (Best Sellers) -->
+    <section class="uz-section">
+      <div class="uz-container">
+        <div class="uz-section-header">
+          <div class="uz-section-title-wrap">
+            <h2 class="uz-section-title">
+              Eng ko‘p sotilganlar
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="9 18 15 12 9 6"></polyline></svg>
+            </h2>
+          </div>
+        </div>
+        <div class="uz-product-grid" id="bestSellersGrid"></div>
+      </div>
+    </section>
+
+    <!-- D4. PRODUCT SECTION: Chegirmadagi mahsulotlar (Discounts) -->
+    <section class="uz-section">
+      <div class="uz-container">
+        <div class="uz-section-header">
+          <div class="uz-section-title-wrap">
+            <h2 class="uz-section-title">
+              Katta chegirmalar
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="9 18 15 12 9 6"></polyline></svg>
+            </h2>
+          </div>
+        </div>
+        <div class="uz-product-grid" id="discountsGrid"></div>
+      </div>
+    </section>
+
+    <!-- D5. PRODUCT SECTION: Yangi mahsulotlar (New Arrivals) -->
+    <section class="uz-section">
+      <div class="uz-container">
+        <div class="uz-section-header">
+          <div class="uz-section-title-wrap">
+            <h2 class="uz-section-title">
+              Yangi mahsulotlar
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="9 18 15 12 9 6"></polyline></svg>
+            </h2>
+          </div>
+        </div>
+        <div class="uz-product-grid" id="newArrivalsGrid"></div>
+      </div>
+    </section>
+
+    <!-- D6. MAIN FILTERABLE & SORTABLE CATALOG SECTION -->
+    <section class="uz-section" id="mainProductsSection">
+      <div class="uz-container">
+        <div class="uz-section-header">
+          <div class="uz-section-title-wrap">
+            <h2 class="uz-section-title" id="mainSectionTitle">Barcha mahsulotlar</h2>
+            <span class="uz-section-count" id="mainSectionCount">34 ta mahsulot</span>
+          </div>
+
+          <!-- Sorting Controls -->
+          <div class="uz-sort-tabs">
+            <button type="button" class="sort-tab-btn active" data-sort="popular">Ommabop</button>
+            <button type="button" class="sort-tab-btn" data-sort="price-asc">Avval arzonlari</button>
+            <button type="button" class="sort-tab-btn" data-sort="price-desc">Avval qimmatlari</button>
+            <button type="button" class="sort-tab-btn" data-sort="rating">Yuqori reyting</button>
+            <button type="button" class="sort-tab-btn" data-sort="discount">Katta chegirma</button>
+          </div>
+        </div>
+
+        <div class="uz-product-grid" id="mainProductsGrid"></div>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- ==========================================================================
+       I. DETAILED FOOTER
+       ========================================================================== -->
+  <footer class="uz-footer">
+    <div class="uz-container">
+      <div class="uz-footer-grid">
+        <!-- Col 1: Biz haqimizda -->
+        <div class="footer-col">
+          <h4 class="footer-col-title">Biz haqimizda</h4>
+          <ul class="footer-links-list">
+            <li><a href="javascript:void(0)" onclick="uiManager.openCityModal()">Topshirish punktlari</a></li>
+            <li><a href="javascript:void(0)">Vakansiyalar</a></li>
+            <li><a href="javascript:void(0)">Biz haqimizda ma'lumot</a></li>
+            <li><a href="javascript:void(0)">Uzum ekotizimi</a></li>
+            <li><a href="javascript:void(0)">Ommaviy oferta</a></li>
+          </ul>
+        </div>
+
+        <!-- Col 2: Foydalanuvchilarga -->
+        <div class="footer-col">
+          <h4 class="footer-col-title">Foydalanuvchilarga</h4>
+          <ul class="footer-links-list">
+            <li><a href="javascript:void(0)">Biz bilan bog'lanish</a></li>
+            <li><a href="javascript:void(0)">Savol-Javob</a></li>
+            <li><a href="javascript:void(0)">Buyurtmani qaytarish</a></li>
+            <li><a href="javascript:void(0)">Muddatli to'lov qoidalari</a></li>
+            <li><a href="javascript:void(0)">Yetkazib berish shartlari</a></li>
+          </ul>
+        </div>
+
+        <!-- Col 3: Tadbirkorlarga -->
+        <div class="footer-col">
+          <h4 class="footer-col-title">Tadbirkorlarga</h4>
+          <ul class="footer-links-list">
+            <li><a href="javascript:void(0)">Uzumda soting</a></li>
+            <li><a href="javascript:void(0)">Sotuvchi kabinetiga kirish</a></li>
+            <li><a href="javascript:void(0)">Topshirish punkti ochish</a></li>
+            <li><a href="javascript:void(0)">Uzum Business hamkorlik</a></li>
+          </ul>
+        </div>
+
+        <!-- Col 4: Ilovani yuklab oling & Socials -->
+        <div class="footer-col">
+          <h4 class="footer-col-title">Ilovani yuklab oling</h4>
+          <div class="footer-app-badges">
+            <a href="javascript:void(0)" class="app-store-btn">
+              <svg width="22" height="22" viewBox="0 0 24 24" fill="currentColor"><path d="M18.71 19.5c-.83 1.24-1.71 2.45-3.05 2.47-1.34.03-1.77-.79-3.29-.79-1.53 0-2 .77-3.27.82-1.31.05-2.3-1.32-3.14-2.53C4.25 17 2.94 12.45 4.7 9.39c.87-1.52 2.43-2.48 4.12-2.51 1.28-.02 2.5.87 3.29.87.78 0 2.26-1.07 3.81-.91.65.03 2.47.26 3.64 1.98-.09.06-2.17 1.28-2.15 3.81.03 3.02 2.65 4.03 2.68 4.04-.03.07-.42 1.44-1.38 2.83M15.97 6.37c.62-.75 1.04-1.8 0.93-2.85-.9.04-1.99.6-2.64 1.35-.58.67-1.08 1.74-0.95 2.77.99.08 2.03-.52 2.66-1.27z"/></svg>
+              <span>App Store</span>
+            </a>
+            <a href="javascript:void(0)" class="app-store-btn">
+              <svg width="22" height="22" viewBox="0 0 24 24" fill="currentColor"><path d="M3.6 2.4l12.7 12.7-4.1 4.1L3.6 2.4zm0 19.2l8.6-8.6 4.1 4.1-12.7 4.5zm14.8-5.3l3.2-1.9c.7-.4.7-1.4 0-1.8l-3.2-1.9-3.7 3.7 3.7 3.7zM3.6 1.5c-.3.4-.6 1-.6 1.8v17.4c0 .8.3 1.4.6 1.8l9.6-9.6L3.6 1.5z"/></svg>
+              <span>Google Play</span>
+            </a>
+          </div>
+
+          <h4 class="footer-col-title" style="margin-top: 18px;">Uzum ijtimoiy tarmoqlarda</h4>
+          <div class="footer-socials">
+            <a href="https://t.me/uzum_market" target="_blank" rel="noopener" class="social-icon-btn" title="Telegram">
+              ✈️
+            </a>
+            <a href="https://instagram.com/uzum.market" target="_blank" rel="noopener" class="social-icon-btn" title="Instagram">
+              📷
+            </a>
+            <a href="https://youtube.com" target="_blank" rel="noopener" class="social-icon-btn" title="YouTube">
+              ▶️
+            </a>
+            <a href="https://facebook.com" target="_blank" rel="noopener" class="social-icon-btn" title="Facebook">
+              👥
+            </a>
+          </div>
+        </div>
+      </div>
+
+      <!-- Bottom Bar -->
+      <div class="uz-footer-bottom">
+        <div>
+          <span>Maxfiylik kelishuvi • Foydalanuvchi kelishuvi</span>
+        </div>
+        <div>
+          <span>«2026© XK MCHJ «UZUM MARKET». Barcha huquqlar himoyalangan. STIR 309376127.»</span>
+        </div>
+        <div class="footer-payments">
+          <span>UZCARD</span>
+          <span>HUMO</span>
+          <span>VISA</span>
+          <span>MASTERCARD</span>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+  <!-- ==========================================================================
+       MOBILE BOTTOM NAVIGATION (Fixed at bottom on mobile)
+       ========================================================================== -->
+  <nav class="mobile-bottom-nav">
+    <div class="mobile-nav-item active" data-nav="home">
+      <div class="mobile-nav-icon-box">
+        <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+          <path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"></path>
+          <polyline points="9 22 9 12 15 12 15 22"></polyline>
+        </svg>
+      </div>
+      <span>Asosiy</span>
+    </div>
+
+    <div class="mobile-nav-item" data-nav="catalog">
+      <div class="mobile-nav-icon-box">
+        <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+          <rect x="3" y="3" width="7" height="7"></rect>
+          <rect x="14" y="3" width="7" height="7"></rect>
+          <rect x="3" y="14" width="7" height="7"></rect>
+          <rect x="14" y="14" width="7" height="7"></rect>
+        </svg>
+      </div>
+      <span>Katalog</span>
+    </div>
+
+    <div class="mobile-nav-item" data-nav="cart">
+      <div class="mobile-nav-icon-box">
+        <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+          <path d="M6 2L3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4z"></path>
+          <line x1="3" y1="6" x2="21" y2="6"></line>
+          <path d="M16 10a4 4 0 0 1-8 0"></path>
+        </svg>
+        <span class="mobile-nav-badge cart-badge">0</span>
+      </div>
+      <span>Savat</span>
+    </div>
+
+    <div class="mobile-nav-item" data-nav="fav">
+      <div class="mobile-nav-icon-box">
+        <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+          <path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"></path>
+        </svg>
+        <span class="mobile-nav-badge fav-badge">0</span>
+      </div>
+      <span>Saralangan</span>
+    </div>
+
+    <div class="mobile-nav-item" data-nav="profile">
+      <div class="mobile-nav-icon-box">
+        <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+          <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path>
+          <circle cx="12" cy="7" r="4"></circle>
+        </svg>
+      </div>
+      <span class="user-profile-name">Profil</span>
+    </div>
+  </nav>
+
+  <!-- ==========================================================================
+       MODALS
+       ========================================================================== -->
+
+  <!-- E. PRODUCT DETAIL MODAL -->
+  <div class="uz-modal" id="productDetailModal">
+    <div class="uz-modal-backdrop"></div>
+    <div class="uz-modal-dialog lg">
+      <div class="uz-modal-header">
+        <span class="uz-modal-title">Mahsulot tafsilotlari</span>
+        <button type="button" class="uz-modal-close-btn" data-close-modal="productDetailModal" aria-label="Yopish">✕</button>
+      </div>
+      <div class="uz-modal-body" id="productDetailContent"></div>
+    </div>
+  </div>
+
+  <!-- F. SHOPPING CART DRAWER / MODAL -->
+  <div class="uz-modal" id="cartDrawerModal">
+    <div class="uz-modal-backdrop"></div>
+    <div class="uz-modal-dialog lg">
+      <div class="uz-modal-header">
+        <div style="display: flex; align-items: baseline; gap: 8px;">
+          <span class="uz-modal-title">Savatingiz</span>
+          <span class="uz-section-count" id="cartDrawerCount">0</span>
+        </div>
+        <button type="button" class="uz-modal-close-btn" data-close-modal="cartDrawerModal" aria-label="Yopish">✕</button>
+      </div>
+      <div class="uz-modal-body">
+        <div class="cart-layout">
+          <div class="cart-items-column" id="cartItemsList"></div>
+          <div class="cart-summary-column" id="cartSummaryContent"></div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- G. FAVORITES MODAL -->
+  <div class="uz-modal" id="favoritesModal">
+    <div class="uz-modal-backdrop"></div>
+    <div class="uz-modal-dialog lg">
+      <div class="uz-modal-header">
+        <span class="uz-modal-title">Saralangan mahsulotlar</span>
+        <button type="button" class="uz-modal-close-btn" data-close-modal="favoritesModal" aria-label="Yopish">✕</button>
+      </div>
+      <div class="uz-modal-body" id="favoritesListContent"></div>
+    </div>
+  </div>
+
+  <!-- CHECKOUT MODAL -->
+  <div class="uz-modal" id="checkoutModal">
+    <div class="uz-modal-backdrop"></div>
+    <div class="uz-modal-dialog md">
+      <div class="uz-modal-header">
+        <span class="uz-modal-title">Rasmiylashtirish</span>
+        <button type="button" class="uz-modal-close-btn" data-close-modal="checkoutModal" aria-label="Yopish">✕</button>
+      </div>
+      <div class="uz-modal-body" id="checkoutModalContent"></div>
+    </div>
+  </div>
+
+  <!-- ORDER SUCCESS CELEBRATION MODAL -->
+  <div class="uz-modal" id="orderSuccessModal">
+    <div class="uz-modal-backdrop"></div>
+    <div class="uz-modal-dialog sm">
+      <div class="uz-modal-body" id="orderSuccessContent"></div>
+    </div>
+  </div>
+
+  <!-- 1-CLICK QUICK BUY MODAL -->
+  <div class="uz-modal" id="quickBuyModal">
+    <div class="uz-modal-backdrop"></div>
+    <div class="uz-modal-dialog sm">
+      <div class="uz-modal-header">
+        <span class="uz-modal-title">Tezkor xarid</span>
+        <button type="button" class="uz-modal-close-btn" data-close-modal="quickBuyModal" aria-label="Yopish">✕</button>
+      </div>
+      <div class="uz-modal-body" id="quickBuyContent"></div>
+    </div>
+  </div>
+
+  <!-- AUTH / LOGIN MODAL -->
+  <div class="uz-modal" id="authModal">
+    <div class="uz-modal-backdrop"></div>
+    <div class="uz-modal-dialog sm">
+      <div class="uz-modal-header">
+        <span class="uz-modal-title">Uzum Market'ga kirish</span>
+        <button type="button" class="uz-modal-close-btn" data-close-modal="authModal" aria-label="Yopish">✕</button>
+      </div>
+      <div class="uz-modal-body" id="authModalContent"></div>
+    </div>
+  </div>
+
+  <!-- CITY SELECTOR MODAL -->
+  <div class="uz-modal" id="cityModal">
+    <div class="uz-modal-backdrop"></div>
+    <div class="uz-modal-dialog sm">
+      <div class="uz-modal-header">
+        <span class="uz-modal-title">Shahar tanlash</span>
+        <button type="button" class="uz-modal-close-btn" data-close-modal="cityModal" aria-label="Yopish">✕</button>
+      </div>
+      <div class="uz-modal-body" id="cityModalContent"></div>
+    </div>
+  </div>
+
+  <!-- TOAST CONTAINER -->
+  <div class="toast-container" id="toastNotificationContainer"></div>
+
+  <!-- ==========================================================================
+       VANILLA JAVASCRIPT SCRIPTS (Ordered loading)
+       ========================================================================== -->
+  <script src="js/products.js"></script>
+  <script src="js/cart.js"></script>
+  <script src="js/favorites.js"></script>
+  <script src="js/search.js"></script>
+  <script src="js/ui.js"></script>
+  <script src="js/app.js"></script>
+</body>
+</html>

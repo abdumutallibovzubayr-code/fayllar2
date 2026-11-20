@@ -1,0 +1,49 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 400" width="100%" height="100%">
+  <defs>
+    <linearGradient id="bgGrad5" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#00A344" />
+      <stop offset="60%" stop-color="#008035" />
+      <stop offset="100%" stop-color="#004D20" />
+    </linearGradient>
+  </defs>
+
+  <rect width="1200" height="400" rx="20" fill="url(#bgGrad5)" />
+
+  <g transform="translate(80, 50)">
+    <rect width="180" height="36" rx="18" fill="#FFE600" />
+    <text x="90" y="23" fill="#004D20" font-family="'Inter', sans-serif" font-weight="800" font-size="14" text-anchor="middle">
+      TEZ VA BEPUL
+    </text>
+  </g>
+
+  <text x="80" y="140" fill="#FFFFFF" font-family="'Inter', sans-serif" font-weight="900" font-size="44" letter-spacing="-1">
+    Ertagayoq yetkazib beramiz!
+  </text>
+  <text x="80" y="195" fill="#FFE600" font-family="'Inter', sans-serif" font-weight="800" font-size="34">
+    Topshirish punktlariga mutlaqo bepul
+  </text>
+  <text x="80" y="245" fill="#E0F2E9" font-family="'Inter', sans-serif" font-weight="500" font-size="18">
+    Bugun soat 23:00 gacha buyurtma bering va ertaga qabul qilib oling!
+  </text>
+
+  <g transform="translate(80, 290)">
+    <rect width="220" height="52" rx="26" fill="#FFFFFF" />
+    <text x="110" y="32" fill="#008035" font-family="'Inter', sans-serif" font-weight="800" font-size="16" text-anchor="middle">
+      Buyurtma berish →
+    </text>
+  </g>
+
+  <!-- Speed Truck Graphic -->
+  <g transform="translate(850, 190)">
+    <circle cx="0" cy="0" r="130" fill="#FFFFFF" fill-opacity="0.1" />
+    <!-- Truck cabin & trailer -->
+    <rect x="-110" y="-45" width="130" height="90" rx="10" fill="#FFFFFF" />
+    <path d="M20 -15 L60 -15 L80 15 L80 45 L20 45 Z" fill="#FFE600" />
+    <circle cx="50" cy="5" r="10" fill="#222" />
+    <circle cx="-65" cy="45" r="18" fill="#222" />
+    <circle cx="-65" cy="45" r="8" fill="#DDD" />
+    <circle cx="55" cy="45" r="18" fill="#222" />
+    <circle cx="55" cy="45" r="8" fill="#DDD" />
+    <text x="-45" y="10" fill="#008035" font-family="'Inter', sans-serif" font-weight="900" font-size="18">UZUM 1 DAY</text>
+  </g>
+</svg>
